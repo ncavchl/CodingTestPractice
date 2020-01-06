@@ -127,3 +127,49 @@ java.net.SocketTimeoutException: Read timed out
 	at org.eclipse.ecf.provider.filetransfer.retrieve.AbstractRetrieveFileTransfer$1.performFileTransfer(AbstractRetrieveFileTransfer.java:178)
 	at org.eclipse.ecf.filetransfer.FileTransferJob.run(FileTransferJob.java:74)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-07 02:01:32.057
+!MESSAGE Preparing classpath changed notification baekjoon3055
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-07 02:01:32.063
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-07 02:01:32.070
+!MESSAGE classpath=19 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-07 02:01:32.076
+!MESSAGE buffering callback sts4.classpath.rBNdPouV baekjoon3055 false 19
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-07 02:01:32.081
+!MESSAGE executing callback sts4.classpath.rBNdPouV 1 batched events
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-07 02:01:32.091
+!MESSAGE executing callback sts4.classpath.rBNdPouV SUCCESS [done]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-07 02:02:16.037
+!MESSAGE Preparing classpath changed notification baekjoon1062
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-07 02:02:16.047
+!MESSAGE exists = false open = true => deleted = true
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-07 02:02:16.054
+!MESSAGE buffering callback sts4.classpath.rBNdPouV baekjoon1062 true 0
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-07 02:02:16.061
+!MESSAGE executing callback sts4.classpath.rBNdPouV 1 batched events
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-07 02:02:16.069
+!MESSAGE executing callback sts4.classpath.rBNdPouV SUCCESS [done]
+
+!ENTRY org.eclipse.lsp4e 4 0 2020-01-07 02:13:04.825
+!MESSAGE 
+!STACK 0
+java.lang.InterruptedException
+	at java.util.concurrent.CompletableFuture.reportGet(Unknown Source)
+	at java.util.concurrent.CompletableFuture.get(Unknown Source)
+	at org.springframework.tooling.boot.ls.jdt.LSPTextHover.getHoverInfo(LSPTextHover.java:109)
+	at org.springframework.tooling.boot.ls.jdt.SpringBootJavaHoverProvider.getHoverInfo2(SpringBootJavaHoverProvider.java:42)
+	at org.eclipse.jdt.internal.ui.text.java.hover.BestMatchHover.getHoverInfo2(BestMatchHover.java:167)
+	at org.eclipse.jdt.internal.ui.text.java.hover.BestMatchHover.getHoverInfo2(BestMatchHover.java:133)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavaEditorTextHoverProxy.getHoverInfo2(JavaEditorTextHoverProxy.java:89)
+	at org.eclipse.jface.text.TextViewerHoverManager$4.run(TextViewerHoverManager.java:169)
