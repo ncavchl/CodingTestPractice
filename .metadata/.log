@@ -173,3 +173,87 @@ java.lang.InterruptedException
 	at org.eclipse.jdt.internal.ui.text.java.hover.BestMatchHover.getHoverInfo2(BestMatchHover.java:133)
 	at org.eclipse.jdt.internal.ui.text.java.hover.JavaEditorTextHoverProxy.getHoverInfo2(JavaEditorTextHoverProxy.java:89)
 	at org.eclipse.jface.text.TextViewerHoverManager$4.run(TextViewerHoverManager.java:169)
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-07 02:35:20.808
+!MESSAGE Preparing classpath changed notification baekjoon1713
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-07 02:35:20.814
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-07 02:35:20.822
+!MESSAGE classpath=19 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-07 02:35:20.827
+!MESSAGE buffering callback sts4.classpath.rBNdPouV baekjoon1713 false 19
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-07 02:35:20.833
+!MESSAGE executing callback sts4.classpath.rBNdPouV 1 batched events
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-07 02:35:20.840
+!MESSAGE executing callback sts4.classpath.rBNdPouV SUCCESS [done]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-07 02:39:22.557
+!MESSAGE Preparing classpath changed notification baekjoon1713
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-07 02:39:22.563
+!MESSAGE exists = false open = true => deleted = true
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-07 02:39:22.570
+!MESSAGE buffering callback sts4.classpath.rBNdPouV baekjoon1713 true 0
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-07 02:39:22.576
+!MESSAGE executing callback sts4.classpath.rBNdPouV 1 batched events
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-07 02:39:22.583
+!MESSAGE executing callback sts4.classpath.rBNdPouV SUCCESS [done]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-07 02:39:28.034
+!MESSAGE Preparing classpath changed notification baekjoon1713
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-07 02:39:28.042
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-07 02:39:28.049
+!MESSAGE classpath=19 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-07 02:39:28.057
+!MESSAGE buffering callback sts4.classpath.rBNdPouV baekjoon1713 false 19
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-07 02:39:28.063
+!MESSAGE executing callback sts4.classpath.rBNdPouV 1 batched events
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-07 02:39:28.071
+!MESSAGE executing callback sts4.classpath.rBNdPouV SUCCESS [done]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-07 02:39:36.676
+!MESSAGE Preparing classpath changed notification baekjoon3055
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-07 02:39:36.686
+!MESSAGE exists = false open = true => deleted = true
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-07 02:39:36.692
+!MESSAGE buffering callback sts4.classpath.rBNdPouV baekjoon3055 true 0
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-07 02:39:36.699
+!MESSAGE executing callback sts4.classpath.rBNdPouV 1 batched events
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-07 02:39:36.705
+!MESSAGE executing callback sts4.classpath.rBNdPouV SUCCESS [done]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-07 02:40:06.201
+!MESSAGE Preparing classpath changed notification baekjoon3055
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-07 02:40:06.211
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-07 02:40:06.222
+!MESSAGE classpath=19 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-07 02:40:06.231
+!MESSAGE buffering callback sts4.classpath.rBNdPouV baekjoon3055 false 19
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-07 02:40:06.238
+!MESSAGE executing callback sts4.classpath.rBNdPouV 1 batched events
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-07 02:40:06.247
+!MESSAGE executing callback sts4.classpath.rBNdPouV SUCCESS [done]
