@@ -257,3 +257,30 @@ java.lang.InterruptedException
 
 !ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-07 02:40:06.247
 !MESSAGE executing callback sts4.classpath.rBNdPouV SUCCESS [done]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-07 03:20:22.019
+!MESSAGE Preparing classpath changed notification baekjoon1713
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-07 03:20:22.027
+!MESSAGE exists = false open = true => deleted = true
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-07 03:20:22.032
+!MESSAGE buffering callback sts4.classpath.rBNdPouV baekjoon1713 true 0
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-07 03:20:22.038
+!MESSAGE executing callback sts4.classpath.rBNdPouV 1 batched events
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-07 03:20:22.044
+!MESSAGE executing callback sts4.classpath.rBNdPouV SUCCESS [done]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-07 03:20:24.472
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.rBNdPouV
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-07 03:20:24.478
+!MESSAGE unsubscribing from classpath changes: sts4.classpath.rBNdPouV
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-07 03:20:24.483
+!MESSAGE subsribers = {}
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-07 03:20:24.490
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.rBNdPouV => OK
