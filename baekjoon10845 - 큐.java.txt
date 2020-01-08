@@ -1,0 +1,84 @@
+//import java.io.BufferedReader;
+//import java.io.BufferedWriter;
+//import java.io.InputStreamReader;
+//import java.io.OutputStreamWriter;
+//import java.util.StringTokenizer;
+//import java.util.HashSet;
+import java.util.Scanner;
+import java.util.Queue;
+import java.util.LinkedList;
+import java.lang.*;
+//import java.util.*;
+
+/*
+ 백준 10845 큐
+ */
+
+public class Main {
+
+	public static void main(String args[]) throws Exception {
+		// BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		// StringTokenizer st = new StringTokenizer(br.readLine());
+
+		// int n, k;
+
+		// n = Integer.parseInt(st.nextToken());
+		Queue<Integer> q = new LinkedList<> ();
+		
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();
+
+		String input;
+		int pushdata=0;
+		
+		for(int i=0; i<n; i++) {
+			input = sc.next();
+			
+			
+			if(input.equals("push")) {
+				pushdata = sc.nextInt();
+				q.add(pushdata);
+			}
+			else {
+				if(input.equals("pop")) {
+					if(q.isEmpty()) {
+						System.out.println(-1);
+					}
+					else {
+						System.out.println(q.poll());
+					}
+				}
+				else if(input.equals("size")) {
+					System.out.println(q.size());	
+				}
+				else if(input.equals("empty")) {
+					if(q.isEmpty()) {
+						System.out.println(1);
+					}
+					else {
+						System.out.println(0);
+					}
+				}
+				else if(input.equals("front")) {
+					if(q.isEmpty()) {
+						System.out.println(-1);
+					}
+					else {
+						System.out.println(q.peek());
+					}
+				}
+				else if(input.equals("back")) {
+					if(q.isEmpty()) {
+						System.out.println(-1);
+					}
+					else {
+						System.out.println(pushdata);
+					}
+				}
+			}
+			
+		}
+		
+
+	}
+}
