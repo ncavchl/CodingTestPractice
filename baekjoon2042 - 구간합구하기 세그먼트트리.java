@@ -16,60 +16,65 @@ import java.io.File;
 //import java.util.*;
 
 /*
- 백준  1991 - 트리순회
+ 백준  2042 구간 합 구하기  - 세그먼트 트리 
+ https://gintrie.tistory.com/32
  */
 public class main {
 	
-	//static String[] tree;
-	static ArrayList<String> tree;
+	static int N; //1~1000000 수의 개수 
+	static int M; // 1~10000 구간의 변경이 일어나는 회수
+	static int K; // 1~10000 구간의 합을 구하는 회수
+	
 	
 	public static void main(String args[]) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st = new StringTokenizer(br.readLine()); 
 		
-		int N = Integer.parseInt(st.nextToken());
+		N = Integer.parseInt(st.nextToken());
+		M = Integer.parseInt(st.nextToken());
+		K = Integer.parseInt(st.nextToken());
+		
+		//System.out.println(N + " " + M + " " + K);
+		
+		int[][] order = new int[M+K][3];
+	    long[] number = new long[N+1];
+		
+		for(int i=1; i<N+1; i++) {
+			st = new StringTokenizer(br.readLine());
+			number[i] = Integer.parseInt(st.nextToken()); 
+			//System.out.println("+" + number[i]);
+			
+		}
+		
 
-		//tree = new String[N*2 + 1];
-		tree = new ArrayList<String> ();
-		tree.add("");
+		SegmentTree2 tree = new SegmentTree2(number);
+		tree.makeTree(1, N, 1);
+		//tree.prints();
 		
-		
-		st = new StringTokenizer(br.readLine()); 
-		
-		String f = st.nextToken();
-		String l = st.nextToken();
-		String r = st.nextToken();
-		
-		
-		tree.add(f);
-		tree.add(l);
-		tree.add(r);
-	
-		for(int i=2; i<=N; i++) {
+		for(int i=0; i<M+K; i++) {
+			st = new StringTokenizer(br.readLine());
+			int menu = Integer.parseInt(st.nextToken()); // 2쿼리인지 1변경인지
+			int index = Integer.parseInt(st.nextToken());
+			long upd = Integer.parseInt(st.nextToken());
 			
-			st = new StringTokenizer(br.readLine()); 
+			tree.prints();
+
 			
-			String mid = st.nextToken();
-			String left = st.nextToken();
-			String right = st.nextToken();
-			for(int j=2; j<= tree.size(); j++) {
-			//	if(tree.get(j).equals(mid)) {
-			//		tree.set(j*2, left);
-			//		tree.set(j*2+1, right);
-			//	}
+			if(menu == 1) {	
+				long dif = upd - number[index];
+				number[index] = upd;
+				
+				tree.update( 1, 1 , N, index , dif);
 			}
-			
-		}		
+			else if(menu == 2) {
+				System.out.println(tree.query(1, 1, N, index, (int) upd));
+			}
+		}
+
 		
-		int le = tree.size();
-		for(int k=1; k< le; k++) 
-			System.out.print(tree.get(k));
-		
-	}
-	
-	public void addTree() {
 		
 	}
+
 }
 
 
