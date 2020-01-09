@@ -11,7 +11,11 @@ import java.lang.*;
 //import java.util.*;
 
 /*
-백준  14476 최대공약수 하나 빼기
+백준 3955 캔디분배
+테스트 케이스 T 1~100
+K명 한봉지 C개 // 10^9
+사탕총개수 10^9 못넘음
+
  */
 
 public class Main {
@@ -26,58 +30,46 @@ public class Main {
 
 		
 		//Scanner sc = new Scanner(System.in);
-		int N;
+		int T; // testcase개수
+		int K;
+		int C;
 		
-		N = Integer.parseInt(st.nextToken());
+		T = Integer.parseInt(st.nextToken());
 		
-		st = new StringTokenizer(br.readLine());
+		double max = Math.pow(10, 9) ;
+		//System.out.println(max);
+		int sum = 0;
+		int result = -1;
 		
-		int[] num = new int[N];
-		for(int i = 0; i<N; i++) {
-			num[i] = Integer.parseInt(st.nextToken());
-		}
-		
-		
-		int[] left = new int[N];
-		int[] right = new int[N];
-		//왼쪽용 
-		left[0] = num[0];
-		for(int i=0; i<N-1; i++) {
-			left[i+1] = gcd(left[i], num[i+1]);
-		}
-		
-		//오른쪽용 
-		right[N-1] = num[N-1];
-		for(int i=N-1; i>0; i--) {
-			right[i-1] = gcd(right[i], num[i-1]);		
-		}
-		
-		for(int i=0; i<N; i++) {
-			System.out.println("l" + left[i] + " r" + right[i]);
-		}
-		
-		int index=0;
-		int ansmax = 1;
-		int max=1;
-		for(int i=0; i<N; i++){
+		for(int i = 0; i<T; i++) {
+			result = -1;
+			st = new StringTokenizer(br.readLine());
+			K = Integer.parseInt(st.nextToken());
+			C = Integer.parseInt(st.nextToken());
 			
-			if(i==0) max = right[1];
-			if(i==N-1) max = left[N-2];
-			if(i!=0 && i!= N-1) max = gcd(left[i-1], right[i+1]);
-			
-			if(ansmax < max) {
-				ansmax = max;
-				index = num[i];
+			// 봉지 함수  들어가기 
+			if(C == 1) { // 봉지가 한개면 사람인원+1 개 주문
+				if(K+1>max) System.out.println("IMPOSSIBLE");
+				else System.out.println(K+1);
+				continue;
 			}
-			System.out.println(i + " " + ansmax + " " + num[i]);
-			
+
+			else if(K == 1) { // 사람이 한명이면 
+					System.out.println(1); // 
+					continue;
+				}
+			else if(gcd(K, C) != 1) { // 배수면 1개 남게 살 수 없음
+					result = -1;
+					System.out.println("IMPOSSIBLE");
+					continue;
+			}
+
+			result = (int) egcd(K, C);
+
+			if(result > max) System.out.println("IMPOSSIBLE");
+			else System.out.println(result);
 			
 		}
-		
-		if(ansmax == 1 || index % ansmax == 0) System.out.println(-1);
-		else System.out.println(ansmax + " " + index);
-		
-	//	System.out.println(a1 + "-" + a2 + "-" + b1 + "-" + b2);
 		
 
 	}
@@ -90,4 +82,26 @@ public class Main {
 		}
 		return Math.abs(a);
 	}
+	
+	static long egcd(long a, long b) {
+		long r, q, tA = a, t, t1=0, t2=1;
+		while(b!=0) {
+			
+			q = a/b;
+			r = a%b;
+			t = t1- q*t2;
+			a = b;
+			b = r; 
+			t1 = t2; 
+			t2 = t;
+			System.out.println(a +" " + b +" " +r+" "+q+" "+t);
+		}
+		while(t1<0) {
+			System.out.println(t1 + "vv");
+			t1 += tA;
+			System.out.println(" + " + tA + " t1 " + t1);
+		}
+		return t1;
+	}
+	
 }
