@@ -13,6 +13,7 @@ import java.util.Stack;
 import java.lang.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.File;
@@ -23,40 +24,53 @@ import java.io.File;
  백준  1837 골드바흐의 추측
  */
 public class main {
-	public static void main(String[] args) {
-        Scanner scan = new Scanner(System.in);
-        final int N = 100;
-        boolean [] b = new boolean[N+1];
-        List<Integer> list = new ArrayList<>();
- 
-        Arrays.fill(b, true);
- 
-        for(int i=3; i*i <= N; i+=2) {
-            if(b[i]) //똑같은 배수를 돌 필요는 없다. i=4일 때 4의 배수는 2의 배수
-                for(int j=i*i; j<=N; j+=i) {
-                    b[j] = false;
-                    System.out.println(j);
-                    if(j==6) System.out.println(6 + " - ");
-                }    
-        }
-        for(int i=3; i<=N; i+=2)
-            if(b[i])
-                list.add(i);
- 
-        while(true) {
-            int n = scan.nextInt();
-            boolean isWrong = true;
-            if(n==0)
-                break;
-            for(int i=0; i<list.size(); i++)
-                if(b[n-list.get(i)]) {
-                    System.out.println(n+ " = " + list.get(i) +" + " + (n-list.get(i)));
-                    isWrong = false;
-                    break;
-                }
-            if(isWrong) //입력만 정상적이라면 틀릴 경우는 사실 없다.
-                System.out.println("Goldbach's conjecture is wrong.");
-        }
+	static HashSet<String> numbers = new HashSet<String> ();
+	static String[] num;
+	static boolean[] visit;
+	static int n, k, index; // n 4~10 , k 2~4
+	static String answer = "";
+	static long[][] arr;
+	static int left;
+	
+	public static void main(String args[]) throws Exception {
+		 //BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		 //StringTokenizer st = new StringTokenizer(br.readLine());
+
+		//int n, k; // n 4~10, k 2~4
+
+		Scanner sc = new Scanner(System.in);
+		n = sc.nextInt();
+		k = sc.nextInt();
+		//index = sc.nextInt();
+		
+		left = n+k;
+		
+		ArrayList<String> ans = new ArrayList<String> ();
+		
+
+		//십억이 나오는 경우 검색 안해도 됨.  십억 이상의 값은 십억외의 수(십억)을 처리해두기 
+		arr = new long[left+1][left+1];
+		for(int i=0; i<arr.length; i++) {
+			for(int j=0; j<=i; j++) {
+				if(j>i) continue;
+				else if(j==0 || i==j) {
+					arr[i][j] = 1;
+				}
+				else {
+					arr[i][j] = arr[i-1][j] + arr[i-1][j-1];
+					if(arr[i][j] > Math.pow(10, 10)) arr[i][j] = (int) (Math.pow(10, 10) + 1);
+				}
+				//if(i==3 && j==3) System.out.println("   여기 " + arr[i][j]);
+			}
+		}
+		
+		for(int i=0; i<left+1; i++) {
+			for(int j=0; j<left+1; j++) {
+				if(i>=j)
+					System.out.println(arr[i][j]+ " i " + i + "- j " + j );
+			}
+				
+		}
     }
 
 }
