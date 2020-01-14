@@ -1,6 +1,5 @@
-import java.io.BufferedReader;
-
-import java.io.InputStreamReader;
+import java.util.*;
+import java.io.*;
 import java.util.StringTokenizer;
 //import java.util.HashSet;
 import java.util.Scanner;
@@ -9,167 +8,133 @@ import java.util.LinkedList;
 import java.util.Stack;
 import java.lang.*;
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.Arrays;
+import java.util.Comparator;
+
 //import java.util.*;
 
 /*
-백준 1256 사전
-a자리고르는조합 = z자리 고르는 조합 
+백준 3176 도로네트워크
 
  */
 
 public class Main {
-	
-	static HashSet<String> numbers = new HashSet<String> ();
-	static String[] num;
-	static boolean[] visit;
-	static int n, k, index; // n 4~10 , k 2~4
-	static String answer = "";
-	static long[][] arr;
-	static int left;
-	
-	public static void main(String args[]) throws Exception {
-		 //BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		 //StringTokenizer st = new StringTokenizer(br.readLine());
+	static final int NMAX = 100001;
+    static final int KMAX = 17; // 2^17 = 131072
+    static int N, M;
+    static ArrayList<int[]> adj[] = new ArrayList[NMAX];
+    static int depth[] = new int[NMAX];
+    static int par[][] = new int[KMAX + 1][NMAX];
+    static int DMIN[][] = new int[KMAX + 1][NMAX];
+    static int DMAX[][] = new int[KMAX + 1][NMAX];
 
-		//int n, k; // n 4~10, k 2~4
-
-		Scanner sc = new Scanner(System.in);
-		n = sc.nextInt();
-		k = sc.nextInt();
-		index = sc.nextInt();
-		
-		left = n+k;
-		
-		ArrayList<String> ans = new ArrayList<String> ();
-		//System.out.println((long)Math.pow(10, 10));
-
-		//십억이 나오는 경우 검색 안해도 됨.  십억 이상의 값은 십억외의 수(십억)을 처리해두기 
-		arr = new long[left+1][left+1];
-		for(int i=0; i<arr.length; i++) {
-			for(int j=0; j<=i; j++) {
-				if(j>i) continue;
-				else if(j==0 || i==j) {
-					arr[i][j] = 1;
-				}
-				else {
-					arr[i][j] = (int) arr[i-1][j] + arr[i-1][j-1];
-									}
-				//if(i==3 && j==3) System.out.println("   여기 " + arr[i][j]);
-				if(arr[i][j] > (long) Math.pow(10, 9) || arr[i][j] < 0) arr[i][j] = (long) (Math.pow(10, 9) + 1);
-
-			}
-		}
-		
-	/*	for(int i=0; i<left+1; i++) {
-			for(int j=0; j<left+1; j++) {
-				if(i>=j)
-					System.out.println(arr[i][j]+ " i " + i + "- j " + j );
-			}
-				
-		}*/
-		
-		//위 배열에 저장해둠 
-		if(index > arr[left][n]) System.out.println(-1);
-		else {
-			find(index, n, n+k, n);
-			System.out.println(answer);
-		}
-		
-	}
-	//a 부터 시작 
-	public static void find(long index, int a, int size, int acnt) {
-		//System.out.println("find" +index + " " + a + " " + size + " " + acnt + " " + " " +answer);
-		
-		if(a == 0 || a==size) {//끝 인덱스 도착
-			//System.out.println(acnt + " " + (n+k) + " " + (n-1) + " " + arr[n+k][n-1]);
-			if(acnt == 0) {
-				for(int i=0; i<size; i++)
-					answer = answer + "z";
-				return ;
-			}
-			else {
-				for(int i=0; i<acnt; i++)
-					answer = answer + "a";
-				return ;
-			}
-			
-		}
-	//	System.out.println("?" + (size-1) + " " + (a-1));
-		if(index <= (long)arr[size-1][a-1]) {
-			//a 고른 경우
-			
-			answer = answer + "a";
-
-			find(index, (a-1), (size-1), acnt-1);
-			//System.out.println("--");
-			
-			
-		}
-		else {
-			//z 고른 경우
-			answer = answer + "z";
-			find((long)((index - (long)arr[size-1][a-1])), a, (size-1), acnt);
-		}
-		
-	}
-	
-	public static void dfs(int k, int i, String s) {
-		System.out.println("dfs" + k + " " + i + " " + s);
-		if(k == 0) {
-			numbers.add(s);
-			//System.out.println("!!");
-			return ;
-			//다 고름 
-		}
-		if(i > n){
-			return ;
-		}
-		for(int j=1; j<=n; j++) {
-			if(!visit[j]) {
-				visit[j] = true;
-				dfs(k-1, j, s + num[j]);
-				visit[j] = false;
-			}
-		}
-	}
-
-	
-	
-	//배열에 저장해두기 
-	public static int combi(int n, int k) {
-		long[][] arr = new long[n+1][k+1];
-		for(int i=0; i<arr.length; i++) {
-			for(int j=0; j<=i; j++) {
-				if(j>k) continue;
-				else if(j==0 || i==j) {
-					arr[i][j] = 1;
-				}
-				else {
-					arr[i][j] = arr[i-1][j] + arr[i-1][j-1];
-				}
-			}
-		}
-		return (int)arr[n][k];
-		
-	}
-	
-	public static int fac(int n){
-        int i=1;
-        for(int j=1; j<=n; j++){
-            i = i * j;
-        }
-        return i;
+    static int min(int a, int b) {
+        return (a < b) ? a : b;
     }
-	
-	// gcd(a,b) = gc(b,a%b)
-	static int gcd(int a, int b) {
-		while(b != 0) {
-			int temp = a%b;
-			a = b;
-			b = temp;
-		}
-		return Math.abs(a);
-	}
-	
+
+    static int max(int a, int b) {
+        return (a > b) ? a : b;
+    }
+
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        StringTokenizer st;
+        N = Integer.parseInt(br.readLine());
+        for (int i = 0; i <= N; i++) {
+            adj[i] = new ArrayList<>();
+            depth[i] = -1;
+            for (int k = 0; k <= KMAX; k++) {
+                DMIN[k][i] = 1000001;
+                DMAX[k][i] = 0;
+                par[k][i] = 0;
+            }
+        }
+        for (int i = 0, f, t, l; i < N - 1; i++) {
+            st = new StringTokenizer(br.readLine());
+            f = Integer.parseInt(st.nextToken());
+            t = Integer.parseInt(st.nextToken());
+            l = Integer.parseInt(st.nextToken());
+            adj[f].add(new int[] { t, l });
+            adj[t].add(new int[] { f, l });
+        }
+
+        Queue<Integer> que = new LinkedList<Integer>();
+        que.add(1);
+        depth[1] = 0;
+        par[0][1] = 1;
+        while (!que.isEmpty()) {
+            int node = que.poll();
+
+            int sz = adj[node].size();
+            for (int i = 0; i < sz; i++) {
+                int cur[] = adj[node].get(i);
+                int nnode = cur[0];
+                int len = cur[1];
+                if (depth[nnode] == -1) // 아직 방문하지 않은 노드이면
+                {
+                    depth[nnode] = depth[node] + 1; // depth 정보 갱신
+                    par[0][nnode] = node; // 한단계 위 부모 정보 갱신
+                    DMAX[0][nnode] = len; // 가장 긴 도로 정보 갱신
+                    DMIN[0][nnode] = len; // 가장 짧은 도로 정보 갱신
+                    que.add(nnode);
+                }
+            }
+        }
+
+        for (int k = 1; k <= KMAX; k++) {
+            for (int n = 1; n <= N; n++) {
+                par[k][n] = par[k - 1][par[k - 1][n]];
+
+                DMAX[k][n] = max(DMAX[k - 1][n], DMAX[k - 1][par[k - 1][n]]);
+                DMIN[k][n] = min(DMIN[k - 1][n], DMIN[k - 1][par[k - 1][n]]);
+            }
+
+        }
+        // M개의 질문의 답을 LCA를 찾으며 구한다.
+        M = Integer.parseInt(br.readLine());
+        for (int i = 0, a, b; i < M; i++) {
+            st = new StringTokenizer(br.readLine());
+            a = Integer.parseInt(st.nextToken());
+            b = Integer.parseInt(st.nextToken());
+            int minv = 1000001, maxv = -1;
+
+            // 두 도시의 depth가 서로 다를 경우 depth를 맞춰 준다.
+            // 맞추면서 지나온 도로중 가장 긴 도로와 가장 짧은 도로 갱신
+            if (depth[a] > depth[b]) {
+                for (int k = KMAX; k >= 0; k--) {
+                    while (a != b && depth[par[k][a]] >= depth[b]) {
+                        minv = min(minv, DMIN[k][a]);
+                        maxv = max(maxv, DMAX[k][a]);
+                        a = par[k][a];
+                    }
+                }
+            } else if (depth[a] < depth[b]) {
+                for (int k = KMAX; k >= 0; k--) {
+                    while (a != b && depth[par[k][b]] >= depth[a]) {
+                        minv = min(minv, DMIN[k][b]);
+                        maxv = max(maxv, DMAX[k][b]);
+                        b = par[k][b];
+                    }
+                }
+            }
+
+            for (int k = KMAX; k >= 0 && a != b; k--) {
+                while (a != b && par[k][a] != par[k][b]) {
+
+                    minv = min(minv, min(DMIN[k][a], DMIN[k][b]));
+                    maxv = max(maxv, max(DMAX[k][a], DMAX[k][b]));
+                    a = par[k][a];
+                    b = par[k][b];
+                }
+            }
+
+            if (a != b) { // 두 도시가 동일하지 않다면 LCA는 두 도시의 부모 도시
+                minv = min(minv, min(DMIN[0][a], DMIN[0][b]));
+                maxv = max(maxv, max(DMAX[0][a], DMAX[0][b]));
+            }
+            bw.write(minv + " " + maxv + "\n");
+        }
+        bw.flush();
+    }
 }
