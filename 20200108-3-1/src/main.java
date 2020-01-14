@@ -2,7 +2,7 @@ import java.util.*;
 import java.io.*;
 
 /**
- * BOJ 11657 타임머신
+ * BOJ 11404 플로이드
  * 벨만-포드
  */
 public class Main {
@@ -19,8 +19,8 @@ public class Main {
     }
 
     static int N, M;
-    static int dist[];
-    static Edge[] e;
+    static int[][] dist; // 거리 계산 
+    static Edge[] e; // 노선들 저장 
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -28,47 +28,52 @@ public class Main {
         StringTokenizer st = new StringTokenizer(br.readLine());
 
         N = Integer.parseInt(st.nextToken());
+        st = new StringTokenizer(br.readLine());
         M = Integer.parseInt(st.nextToken());
 
-        dist = new int[N + 1];
-        dist[1] = 0; // 시작점 1 값
-        // 초기화
-        for (int i = 2; i <= N; i++) {
-            dist[i] = Integer.MAX_VALUE;
-        }
-        boolean isCycle = false;
-        e = new Edge[M];//버스노선
-
-        for (int i = 0; i < M; i++) {
+        dist = new int[N+1][N+1];
+        
+        e = new Edge[M];
+                
+        //엣지 등록
+        for(int i = 0; i < M; i++) {
             st = new StringTokenizer(br.readLine());
-            e[i] = new Edge(Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken()),
-                    Integer.parseInt(st.nextToken()));
-        }
+            int from = Integer.parseInt(st.nextToken());
+            int to = Integer.parseInt(st.nextToken());
+            int cost = Integer.parseInt(st.nextToken());
 
-        for (int i = 0; i <= N; i++) { // 음수 사이클 판정을 위해 N번째도 수행
-            for (int j = 0; j < M; j++) {
-                if (dist[e[j].from] != Integer.MAX_VALUE
-                        && dist[e[j].to] > dist[e[j].from] + e[j].cost) {
-                    dist[e[j].to] = dist[e[j].from] + e[j].cost;
-                    if (i == N) {//줄어드는과정중 돌아가는 값이있다면 사이클존재.
-                        isCycle = true;
+            // 거리중 최소값으로 입력 
+            if(dist[from][to] == 0) {
+            	dist[from][to] = cost;
+            } else {
+            	dist[from][to] = Math.min(cost, dist[from][to]);
+            }
+        }
+        
+        for (int mid = 1; mid <= N; mid++){ 
+            for (int start = 1; start <= N; start++){ 
+                if (dist[start][mid] > 0) {
+                    for(int end = 1; end <= N; end++){ 
+                        if(dist[mid][end] == 0 || start == end)
+                            continue;
+                        // 플로이드 마샬
+                        if(dist[start][end] == 0 || dist[start][end] > dist[start][mid] + dist[mid][end]) {
+                            dist[start][end] = dist[start][mid] + dist[mid][end];
+                        }
                     }
                 }
             }
         }
 
-        if (isCycle) {
-            bw.write("-1");
-        } else {
-            for (int i = 2; i < dist.length; i++) {
-                if (dist[i] == Integer.MAX_VALUE) {
-                    bw.write("-1" + "\n");
-                } else {
-                    bw.write(dist[i] + "\n");
-                }
+        for(int x = 1; x <= N; x++){ 
+            for(int y = 1; y <= N; y++) {
+                System.out.printf("%d ", dist[x][y]);
             }
+
+            System.out.println();
         }
         br.close();
         bw.close();
+        
     }
 }
