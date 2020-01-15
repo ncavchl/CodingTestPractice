@@ -18,7 +18,18 @@ import java.util.Comparator;
  */
 
 public class Main {
+	static class Node{
+		int next, w;
+		Node(int a, int b){
+			this.next = a;
+			this.w = b;
+		}
+	}
 	static int N, M; //
+	static int[] parent;
+	static boolean[] visit;
+	static int[] dist;
+	static ArrayList<Node>[] arrayList;
 
 	public static void main(String[] args) throws NumberFormatException, IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -39,39 +50,32 @@ public class Main {
 				for (int j = 1; j < N + 1; j++)
 					map[i][j] = MAX;
 
-			for (int i = 0; i < M; i++) {
-				st = new StringTokenizer(br.readLine());
-				String menu = st.nextToken();
-				if (menu.equals("!")) {
-					// st = new StringTokenizer(br.readLine());
-					int a = Integer.parseInt(st.nextToken());
-					int b = Integer.parseInt(st.nextToken());
-					int w = Integer.parseInt(st.nextToken());
-					map[a][b] = w; // b가 a보다 w만큼 무겁다.
-					map[b][a] = -w;
-				} else {
-					// st = new StringTokenizer(br.readLine());
-					int a = Integer.parseInt(st.nextToken());
-					int b = Integer.parseInt(st.nextToken());
-
-					// map 갱신
-					for (int k = 1; k < N + 1; k++) {
-
-						if (map[a][k] != MAX && map[k][b] != MAX) {
-							map[a][b] = map[a][k] + map[k][b];
-
-						}
-					}
-
-					if (map[a][b] == MAX)
-						System.out.println("UNKNOWN");
-					else {
-						System.out.println(map[a][b]);
-					}
-				}
-			}
 
 		}
 
+	}
+	
+	static int find(int x) {
+		if(parent[x] == x) {
+			return x;
+		}
+		return parent[x] = find(parent[x]);
+	}
+	
+	static void union(int a, int b) {
+		int A = find(a);
+		int B = find(b);
+		
+		parent[B] = A;
+	}
+	
+	static void dfs(int cur) {
+		for(Node n : arrayList[cur]) {
+			if(!visit[n.next]) {
+				visit[n.next] = true;
+				dist[n.next] = dist[cur] + n.w;
+				dfs(n.next);
+			}
+		}
 	}
 }
