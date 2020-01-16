@@ -82,12 +82,8 @@ public class Main {
         bw.flush();
     }
 
+    // A와 A의 자식 노드가 A에서 parent노드로 가는 간선을 사용하지 않고 도달할 수 있는 정점 중 가장 먼저 dfs함수가 방문한 정점을 반환
     private static int dfs(int node, int parent) {
-        /* 자기보다 앞에 탐색할수 있는 경우가 있으면 단절점이 되지 않는다. */
-        /* DFS스패닝트리를 만들면서 기존 트리는 그대로 사용됨 없어지는 것이 아님*/
-        /* DFS스패닝 트리의 역할은 순서를 지정해 주는 것과 
-         * DFS스패닝 트리에서 루트가 자식을 2개 가지는지 체크 */
-
         discovered[node] = count++;
         int ret = discovered[node];
         // 자기랑 인접노드 중에서 가장 빨리 방문되는 노드의 순서를 저장하는 변수
@@ -103,7 +99,6 @@ public class Main {
 
                 // low가 자기 방문 순서보다 늦는 경우, 자기보다 앞에 있는 경로는 자기를 통해서 밖에 못감 -> 단절선
                 if(low > discovered[node]) {
-                	//System.out.println("low" + low + " " + node + "!! " + edge.to  + " ? " + discovered[node]);
                     res.add(new Edge(Math.min(node, edge.to), Math.max(node, edge.to)));
                 }
 

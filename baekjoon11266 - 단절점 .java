@@ -1,9 +1,7 @@
-import java.util.*;
-import java.io.*;
-
-//import java.util.*;
-
-
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 /**
  * BOJ 11266 단절점
@@ -17,11 +15,11 @@ public class Main {
         }
     }  
 
-    static int count = 1; // 확인을 위해 
-    static int[] discovered; // 탐색하는 순서 
+    static int count = 1;
+    static int[] discovered;
     static int[] lows;  // low 확인을 위한 부분
-    static boolean[] isCutVertax; // 단절점 여부
-    static ArrayList<Edge>[] aLists; // 정점마다 연결정보 저장
+    static boolean[] isCutVertax;
+    static ArrayList<Edge>[] aLists;
 
     public static void main(String[] args) throws Exception {
         BufferedReader br =new BufferedReader(new InputStreamReader(System.in));
@@ -33,10 +31,12 @@ public class Main {
         discovered = new int[N+1];
         lows = new int[N+1];
         isCutVertax = new boolean[N+1];
-        
-        for(int i=1; i<N+1; i++)
-        	aLists[i] = new ArrayList<>();
-        
+
+        // 인접리스트 초기화
+        for(int i = 1; i <= N; i ++) {
+            aLists[i] = new ArrayList<>();
+        }
+
         for(int i = 0; i < M; i ++) {
             st = new StringTokenizer(br.readLine());
             int a = Integer.parseInt(st.nextToken());
@@ -45,12 +45,11 @@ public class Main {
             aLists[b].add(new Edge(a));
         }
 
-        
-        //dfs 탐색
-        for(int i=1; i<=N; i++) {
-        	if(discovered[i] == 0) {
-        		dfs(i, true); // 노드, root여부
-        	}
+        // 탐색 순번
+        for (int i = 1; i <= N ;i ++) {
+            if(discovered[i] == 0) {
+                dfs(i, true);
+            }
         }
         int cnt = 0;
         for (int i = 1; i <= N ; i++) {
@@ -73,26 +72,26 @@ public class Main {
         }
         */
     }
-    
-    private static int dfs(int node, boolean isRoot){
-    	 /* 자기보다 앞에 탐색할수 있는 경우가 있으면 단절점이 되지 않는다. */
+
+    // A의 자식 노드가 A를 거치지 않고 도달할 수 있는 정점 중 가장 먼저 dfs함수가 방문한 정점을 반환
+    private static int dfs(int node, boolean isRoot) {
+        /* 자기보다 앞에 탐색할수 있는 경우가 있으면 단절점이 되지 않는다. */
         /* DFS스패닝트리를 만들면서 기존 트리는 그대로 사용됨 없어지는 것이 아님*/
         /* DFS스패닝 트리의 역할은 순서를 지정해 주는 것과 
          * DFS스패닝 트리에서 루트가 자식을 2개 가지는지 체크 */
-    	
-    	discovered[node] = count++;
-    	int ret = discovered[node]; // 순서저장
-    	
-    	int child = 0;//루트 노드일 경우 스패닝 트리에서 자식 수 
-    	
-    	Edge edge ;
-    	for(int i=0; i<aLists[node].size(); i++) {
-    		edge = aLists[node].get(i);
-    		
-    		if(discovered[edge.to] == 0) {
-    			//아직 dfs안들린 곳이면
-    			child++; // 자식 수 늘림
-    			//자식노드 들 자신 순서 저장? // 자식도느가 갈 수 있는 노드 중 가장 일찍 방문한 노드의 방문순번
+
+        discovered[node] = count++;
+        int ret = discovered[node];
+
+        int child = 0; // 루트 노드일 경우 스패닝트리에서 자식수
+
+        Edge edge;
+        for (int i=0; i<aLists[node].size(); i++) {
+            edge = aLists[node].get(i);
+
+            if (discovered[edge.to] == 0) {
+                child++;
+
                 // 자식 노드가 갈수 있는 노드 중 가장 일찍 방문한 노드의 방문순번
                 int low = dfs(edge.to, false);
                 lows[edge.to] = low;
@@ -104,7 +103,7 @@ public class Main {
 
                 ret = Math.min(ret, low);
             } else {
-                //ex)5번노드인 경우(처음 1과 연결된 노드/ 1은 시작점  / 연결된 노드인데 1의 방문순서가 더빠르면 
+                // 이미 방문한 정점과 ret값 비교 최소값 저장
                 ret = Math.min(ret, discovered[edge.to]);
             }
         }
