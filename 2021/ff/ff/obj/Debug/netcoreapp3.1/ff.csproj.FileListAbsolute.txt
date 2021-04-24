@@ -1,0 +1,7 @@
+/Users/a680123/Desktop/dev/coding/ff/ff/obj/Debug/netcoreapp3.1/ff.csprojAssemblyReference.cache
+/Users/a680123/Desktop/dev/coding/ff/ff/obj/Debug/netcoreapp3.1/ff.AssemblyInfoInputs.cache
+/Users/a680123/Desktop/dev/coding/ff/ff/obj/Debug/netcoreapp3.1/ff.AssemblyInfo.cs
+/Users/a680123/Desktop/dev/coding/ff/ff/obj/Debug/netcoreapp3.1/ff.csproj.CoreCompileInputs.cache
+/Users/a680123/Desktop/dev/coding/ff/ff/obj/Debug/netcoreapp3.1/ff.MvcApplicationPartsAssemblyInfo.cache
+/Users/a680123/Desktop/dev/coding/ff/ff/obj/Debug/netcoreapp3.1/ff.RazorAssemblyInfo.cache
+/Users/a680123/Desktop/dev/coding/ff/ff/obj/Debug/netcoreapp3.1/ff.RazorAssemblyInfo.cs
